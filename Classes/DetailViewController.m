@@ -561,8 +561,9 @@
 	} else if (indexPath.section == kResponseSection) {
         ResponseViewController *vc = [[ResponseViewController alloc] initWithNibName:@"ResponseViewController" bundle:nil];
         vc.text = self.request.response;
-        NSLog(@"vc text is:\n%@", vc.text);
-        vc.modalPresentationStyle = UIModalPresentationFormSheet;
+        vc.baseURL = self.request.url;
+        //vc.modalPresentationStyle = UIModalPresentationFormSheet;
+        vc.modalPresentationStyle = UIModalPresentationFullScreen;
         [self presentModalViewController:vc animated:YES];
     }
 }
