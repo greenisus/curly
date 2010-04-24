@@ -10,7 +10,7 @@
 
 @class DetailViewController;
 
-@interface HeaderViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface HeaderViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate> {
     IBOutlet UITableView *tableView;
     IBOutlet UIView *footerView;
     UITextField *nameTextField;

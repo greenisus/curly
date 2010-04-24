@@ -277,6 +277,11 @@
     return YES;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
+}
+
 #pragma mark -
 #pragma mark Table view data source
 
@@ -420,7 +425,7 @@
     return cell;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)aTableView textFieldCellForRowAtIndexPath:(NSIndexPath *)indexPath label:(NSString *)label textField:(UITextField **)textField value:(NSString *)value {
+- (UITableViewCell *)tableView:(UITableView *)aTableView textFieldCellForRowAtIndexPath:(NSIndexPath *)indexPath label:(NSString *)label textField:(UITextField **)textField value:(NSString *)value placeholder:(NSString *)placeholder {
     static NSString *CellIdentifier = @"NameCell";
     
     TextFieldCell *cell = (TextFieldCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -443,6 +448,7 @@
     
     cell.textField.delegate = self;    
     cell.textLabel.text = label;
+    cell.textField.placeholder = placeholder;
     cell.textField.text = value;
     *textField = cell.textField;
     
@@ -466,13 +472,13 @@
     
     if (indexPath.section == kNameSection) {
         if (indexPath.row == 0) {
-            return [self tableView:aTableView textFieldCellForRowAtIndexPath:indexPath label:@"Name" textField:&nameTextField value:self.request.name];
+            return [self tableView:aTableView textFieldCellForRowAtIndexPath:indexPath label:@"Name" textField:&nameTextField value:self.request.name placeholder:@"Untitled"];
         } else if (indexPath.row == 1) {
-            return [self tableView:aTableView textFieldCellForRowAtIndexPath:indexPath label:@"Group" textField:&groupTextField value:self.request.group];
+            return [self tableView:aTableView textFieldCellForRowAtIndexPath:indexPath label:@"Group" textField:&groupTextField value:self.request.group placeholder:@""];
         }
     } else if (indexPath.section == kSetupSection) {
         if (indexPath.row == 0) {
-            return [self tableView:aTableView textFieldCellForRowAtIndexPath:indexPath label:@"URL" textField:&urlTextField value:self.request.url];
+            return [self tableView:aTableView textFieldCellForRowAtIndexPath:indexPath label:@"URL" textField:&urlTextField value:self.request.url placeholder:@"http://your-url-here"];
         } else if (indexPath.row == 1) {
             cell.textLabel.text = @"Method";
             cell.detailTextLabel.text = self.request.method;

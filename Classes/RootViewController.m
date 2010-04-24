@@ -136,6 +136,9 @@
     NSManagedObject *managedObject = [fetchedResultsController objectAtIndexPath:indexPath];
     //cell.textLabel.text = [[managedObject valueForKey:@"timeStamp"] description];
     cell.textLabel.text = [[managedObject valueForKey:@"request_name"] description];
+    if ([cell.textLabel.text isEqualToString:@""]) {
+        cell.textLabel.text = @"Untitled";
+    }
     
     NSString *url = [[managedObject valueForKey:@"url"] description];
     if (url == nil) {
@@ -163,7 +166,7 @@
     
     // If appropriate, configure the new managed object.
     // [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
-    [newManagedObject setValue:@"Untitled" forKey:@"request_name"];
+    [newManagedObject setValue:@"" forKey:@"request_name"];
     [newManagedObject setValue:[NSNumber numberWithBool:NO] forKey:@"follow_redirects"];
     [newManagedObject setValue:@"GET" forKey:@"method"];
     

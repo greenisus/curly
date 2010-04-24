@@ -106,12 +106,15 @@
     if (anIndexPath.row == 0) {
         cell.textLabel.text = @"Name";
         nameTextField = cell.textField;
+        nameTextField.delegate = self;
+        nameTextField.returnKeyType = UIReturnKeyNext;
         if (key != nil && ![key isEqualToString:@""]) {
             nameTextField.text = key;
         }
     } else {
         cell.textLabel.text = @"Value";
         valueTextField = cell.textField;
+        valueTextField.delegate = self;
         if (value != nil && ![value isEqualToString:@""]) {
             valueTextField.text = value;
         }
@@ -194,6 +197,18 @@
     [self.detailViewController.rootViewController saveSelectedRequest];
     [self.detailViewController.tableView reloadData];
 	[self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark -
+#pragma mark Text Field Delegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == nameTextField) {
+        [valueTextField becomeFirstResponder];
+    } else if (textField == valueTextField) {
+        [self saveButtonPressed:nil];
+    }
+    return NO;
 }
 
 
