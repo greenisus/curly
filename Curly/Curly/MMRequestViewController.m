@@ -492,6 +492,8 @@ typedef enum {
         selectedHTTPMethod = httpMethods[row];
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:MMMethodRow inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     } else {
+        selectedUserAgent = userAgents[row];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:MMUserAgentRow inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
     }
     
 }
