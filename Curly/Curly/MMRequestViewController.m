@@ -85,8 +85,6 @@ typedef enum {
     [self configureCellAccessories];
     self.requestHeaders = [[NSMutableArray alloc] init];
     
-    selectedHTTPMethod = httpMethods[0];
-    
     self.tableView.editing = YES;
     self.tableView.allowsSelectionDuringEditing = YES;
     
@@ -108,12 +106,24 @@ typedef enum {
         DLog(@"Error loading HTTP methods: %@", error);
     }
     
+    for (MMHTTPMethod *method in httpMethods) {
+        if ([method.name isEqualToString:@"GET"]) {
+            selectedHTTPMethod = method;
+        }
+    }
+    
     NSFetchRequest *userAgentsRequest = [NSFetchRequest fetchRequestWithEntityName:@"MMUserAgent"];
     [userAgentsRequest setSortDescriptors:@[sortDescriptor]];
 
     userAgents = [context executeFetchRequest:userAgentsRequest error:&error];
     if (error) {
         DLog(@"Error loading HTTP methods: %@", error);
+    }
+    
+    for (MMUserAgent *userAgent in userAgents) {
+        if ([userAgent.name isEqualToString:@"Curly"]) {
+            selectedUserAgent = userAgent;
+        }
     }
     
 }
@@ -275,7 +285,7 @@ typedef enum {
         } else if (indexPath.row == MMUserAgentRow) {
 
             cell.textLabel.text = NSLocalizedString(@"User Agent", nil);
-            cell.detailTextLabel.text = @"Curly";
+            cell.detailTextLabel.text = selectedUserAgent.name;
             cell.selectionStyle = UITableViewCellSelectionStyleDefault;
             if (userAgentPickerActive) {
                 cell.detailTextLabel.textColor = kMMTintColor;
