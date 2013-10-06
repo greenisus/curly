@@ -80,9 +80,9 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self configureCellAccessories];
     [self loadSupportingData];
     
-    [self configureCellAccessories];
     self.requestHeaders = [[NSMutableArray alloc] init];
     
     self.tableView.editing = YES;
@@ -106,9 +106,11 @@ typedef enum {
         DLog(@"Error loading HTTP methods: %@", error);
     }
     
-    for (MMHTTPMethod *method in httpMethods) {
+    for (NSInteger i = 0; i < [httpMethods count]; i++) {
+        MMHTTPMethod *method = httpMethods[i];
         if ([method.name isEqualToString:@"GET"]) {
             selectedHTTPMethod = method;
+            [self.methodPicker selectRow:i inComponent:0 animated:NO];
         }
     }
     
@@ -120,9 +122,11 @@ typedef enum {
         DLog(@"Error loading HTTP methods: %@", error);
     }
     
-    for (MMUserAgent *userAgent in userAgents) {
+    for (NSInteger i = 0; i < [userAgents count]; i++) {
+        MMUserAgent *userAgent = userAgents[i];
         if ([userAgent.name isEqualToString:@"Curly"]) {
             selectedUserAgent = userAgent;
+            [self.userAgentPicker selectRow:i inComponent:0 animated:NO];
         }
     }
     
