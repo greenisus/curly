@@ -5,6 +5,7 @@
       "idiom" : "iphone",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
+      "filename" : "Curly4.png",
       "scale" : "2x"
     },
     {
@@ -21,6 +22,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
+      "filename" : "Curly-iPad-Portrait.png",
       "scale" : "1x"
     },
     {
@@ -28,6 +30,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
+      "filename" : "Curly-iPad-Landscape.png",
       "scale" : "1x"
     },
     {
@@ -35,6 +38,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
+      "filename" : "Curly-iPad-Retina-Portrait.png",
       "scale" : "2x"
     },
     {
@@ -42,6 +46,7 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
+      "filename" : "Curly-iPad-Retina-Landscape.png",
       "scale" : "2x"
     }
   ],

@@ -50,6 +50,8 @@
     [self seedMethod:@"TRACE"];
     [self seedMethod:@"CONNECT"];
     
+    [self seedUserAgent:@"" name:NSLocalizedString(@"No User Agent", nil) agent:@""];
+    
     // clients
     [self seedUserAgent:NSLocalizedString(@"Clients", nil) name:@"Curly" agent:@"Curly 2.0"];
     
