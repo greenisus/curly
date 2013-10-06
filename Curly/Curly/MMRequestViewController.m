@@ -505,11 +505,10 @@ typedef enum {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-
 - (IBAction)doneButtonPressed:(id)sender {
     
     NSManagedObjectContext *context = [MMAppDelegate context];
+    
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"MMRequest" inManagedObjectContext:context];
     NSError *error = nil;
     
@@ -519,12 +518,14 @@ typedef enum {
     request.method = selectedHTTPMethod;
     request.userAgent = selectedUserAgent;
     request.validateSSL = @(self.sslSwitch.on);
+    request.created = [NSDate date];
     
     [context insertObject:request];
-    
+
     if ([context save:&error]) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
+#warning "validation error messages should go here"
         DLog(@"Error saving request: %@", error);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"There was a problem saving this HTTP request.  Please try again.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss", nil) otherButtonTitles:nil];
         [alert show];

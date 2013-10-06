@@ -10,9 +10,9 @@
         <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="followRedirects" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="name" attributeType="String" indexed="YES" spotlightIndexingEnabled="YES" syncable="YES"/>
+        <attribute name="name" attributeType="String" minValueString="1" indexed="YES" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="updated" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" attributeType="String" minValueString="1" syncable="YES"/>
         <attribute name="validateSSL" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="headers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MMRequestHeader" inverseName="request" inverseEntity="MMRequestHeader" syncable="YES"/>
         <relationship name="method" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MMHTTPMethod" inverseName="requests" inverseEntity="MMHTTPMethod" syncable="YES"/>
