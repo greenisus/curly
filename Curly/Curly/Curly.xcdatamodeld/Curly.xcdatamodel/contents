@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="13A598" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="MMHTTPMethod" representedClassName="MMHTTPMethod" syncable="YES">
+        <attribute name="created" optional="YES" attributeType="Date" defaultDateTimeInterval="0" defaultValueString="[NSDate date]" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userCreated" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="requests" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MMRequest" inverseName="method" inverseEntity="MMRequest" syncable="YES"/>
+    </entity>
+    <entity name="MMRequest" representedClassName="MMRequest" syncable="YES">
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="followRedirects" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" indexed="YES" spotlightIndexingEnabled="YES" syncable="YES"/>
+        <attribute name="updated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="validateSSL" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="headers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MMRequestHeader" inverseName="request" inverseEntity="MMRequestHeader" syncable="YES"/>
+        <relationship name="method" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MMHTTPMethod" inverseName="requests" inverseEntity="MMHTTPMethod" syncable="YES"/>
+        <relationship name="responses" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="MMResponse" inverseName="request" inverseEntity="MMResponse" syncable="YES"/>
+        <relationship name="script" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MMScript" inverseName="requests" inverseEntity="MMScript" syncable="YES"/>
+        <relationship name="userAgent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MMUserAgent" inverseName="requests" inverseEntity="MMUserAgent" syncable="YES"/>
+    </entity>
+    <entity name="MMRequestHeader" representedClassName="MMRequestHeader" syncable="YES">
+        <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="request" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MMRequest" inverseName="headers" inverseEntity="MMRequest" syncable="YES"/>
+    </entity>
+    <entity name="MMResponse" representedClassName="MMResponse" syncable="YES">
+        <attribute name="body" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="headers" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="responseTime" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="statusCode" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="request" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MMRequest" inverseName="responses" inverseEntity="MMRequest" syncable="YES"/>
+    </entity>
+    <entity name="MMScript" syncable="YES">
+        <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updated" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="requests" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MMRequest" inverseName="script" inverseEntity="MMRequest" syncable="YES"/>
+    </entity>
+    <entity name="MMUserAgent" representedClassName="MMUserAgent" syncable="YES">
+        <attribute name="agent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="grouping" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userCreated" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="requests" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MMRequest" inverseName="userAgent" inverseEntity="MMRequest" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="MMHTTPMethod" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MMRequest" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MMRequestHeader" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MMResponse" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MMScript" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="MMUserAgent" positionX="0" positionY="0" width="0" height="0"/>
+    </elements>
+</model>
