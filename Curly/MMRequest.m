@@ -27,4 +27,11 @@
 @dynamic method;
 @dynamic script;
 
+- (BOOL)validateUrl:(NSString *)ioValue error:(NSError **)outError {
+    
+    NSURL *url = [NSURL URLWithString:ioValue];
+    return url != nil;
+    
+}
+
 @end

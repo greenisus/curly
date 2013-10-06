@@ -511,21 +511,25 @@ typedef enum {
     
     NSManagedObjectContext *context = [MMAppDelegate context];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"MMRequest" inManagedObjectContext:context];
+    NSError *error = nil;
     
     MMRequest *request = [[MMRequest alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
     request.name = self.nameTextField.text;
-    
-    NSURL *url = [NSURL URLWithString:self.urlTextField.text];
-    
     request.url = self.urlTextField.text;
+    request.method = selectedHTTPMethod;
+    request.userAgent = selectedUserAgent;
+    request.validateSSL = @(self.sslSwitch.on);
     
+    [context insertObject:request];
     
-//    NSDictionary *itemAttributes = [[HLAPIClient sharedClient] attributesForRepresentation:firstArg ofEntity:entity fromResponse:nil];
-//    [roomItem safelySetValuesForKeysWithDictionary:itemAttributes];
-    
-//    [context rollback];
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([context save:&error]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        DLog(@"Error saving request: %@", error);
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"There was a problem saving this HTTP request.  Please try again.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss", nil) otherButtonTitles:nil];
+        [alert show];
+    }
+
 }
 
 - (void)sslSwitchValueChanged:(id)sender {
