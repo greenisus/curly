@@ -146,6 +146,7 @@ typedef enum {
     self.nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 2, 225, 24)];
     self.nameTextField.delegate = self;
     self.nameTextField.returnKeyType = UIReturnKeyNext;
+    self.nameTextField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     self.nameTextField.textAlignment = NSTextAlignmentRight;
     self.nameTextField.placeholder = NSLocalizedString(@"Request Name", nil);
     self.nameTextField.text = @"";
@@ -154,8 +155,10 @@ typedef enum {
     self.urlTextFieldContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 225, 26)];
     self.urlTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 2, 225, 24)];
     self.urlTextField.delegate = self;
+    self.urlTextField.keyboardType = UIKeyboardTypeURL;
     self.urlTextField.returnKeyType = UIReturnKeyDone;
     self.urlTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.urlTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.urlTextField.textAlignment = NSTextAlignmentRight;
     self.urlTextField.placeholder = NSLocalizedString(@"URL", nil);
     self.urlTextField.text = @"";

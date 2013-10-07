@@ -33,6 +33,7 @@
 		2721D8D717FE4439002BF112 /* MMRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2721D8D617FE4439002BF112 /* MMRequest.m */; };
 		2721D8DA17FE4439002BF112 /* MMUserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2721D8D917FE4439002BF112 /* MMUserAgent.m */; };
 		27A45EF418008E30002DEE77 /* MMCoreDataSeeder.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A45EF318008E30002DEE77 /* MMCoreDataSeeder.m */; };
+		27A6528E1801F67900A3110D /* MMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A6528D1801F67900A3110D /* MMSettingsViewController.m */; };
 		3B1C3FAE1187406395FD41AD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06CD0F90D5D7410E8F6A59FF /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,8 @@
 		2721D8D917FE4439002BF112 /* MMUserAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMUserAgent.m; path = ../MMUserAgent.m; sourceTree = "<group>"; };
 		27A45EF218008E30002DEE77 /* MMCoreDataSeeder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMCoreDataSeeder.h; sourceTree = "<group>"; };
 		27A45EF318008E30002DEE77 /* MMCoreDataSeeder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMCoreDataSeeder.m; sourceTree = "<group>"; };
+		27A6528C1801F67900A3110D /* MMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSettingsViewController.h; sourceTree = "<group>"; };
+		27A6528D1801F67900A3110D /* MMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMSettingsViewController.m; sourceTree = "<group>"; };
 		331FFBF8244744A4861A709B /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -120,6 +123,7 @@
 		27100FC017F8E8B500A7E8E8 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				27A6528B1801F66900A3110D /* Settings */,
 				2711524017F8B18A00319A0C /* MMMasterViewController.h */,
 				2711524117F8B18A00319A0C /* MMMasterViewController.m */,
 				2711524317F8B18A00319A0C /* MMDetailViewController.h */,
@@ -242,6 +246,15 @@
 				2711523517F8B18A00319A0C /* MMAppDelegate.m */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		27A6528B1801F66900A3110D /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				27A6528C1801F67900A3110D /* MMSettingsViewController.h */,
+				27A6528D1801F67900A3110D /* MMSettingsViewController.m */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -390,6 +403,7 @@
 				2711523217F8B18A00319A0C /* main.m in Sources */,
 				27A45EF418008E30002DEE77 /* MMCoreDataSeeder.m in Sources */,
 				2721D8D417FE4439002BF112 /* MMResponse.m in Sources */,
+				27A6528E1801F67900A3110D /* MMSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
