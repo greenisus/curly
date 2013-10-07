@@ -112,22 +112,29 @@ typedef enum {
         
     } else if (indexPath.section == MMCodeSharingSection) {
         
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
         if (indexPath.row == MMCodeSharingCurlRow) {
             cell.textLabel.text = @"curl";
+            cell.accessoryType = [defaults boolForKey:kMMCodeSharingCurl] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
         } else if (indexPath.row == MMCodeSharingObjCRow) {
             cell.textLabel.text = @"Objective-C";
+            cell.accessoryType = [defaults boolForKey:kMMCodeSharingObjC] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
         } else if (indexPath.row == MMCodeSharingRubyRow) {
             cell.textLabel.text = @"Ruby";
+            cell.accessoryType = [defaults boolForKey:kMMCodeSharingRuby] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
         } else if (indexPath.row == MMCodeSharingPythonRow) {
             cell.textLabel.text = @"Python";
+            cell.accessoryType = [defaults boolForKey:kMMCodeSharingPython] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
         } else if (indexPath.row == MMCodeSharingPHPRow) {
             cell.textLabel.text = @"PHP";
+            cell.accessoryType = [defaults boolForKey:kMMCodeSharingPHP] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
         } else if (indexPath.row == MMCodeSharingJavaRow) {
             cell.textLabel.text = @"Java";
+            cell.accessoryType = [defaults boolForKey:kMMCodeSharingJava] ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
         } else {
             cell.textLabel.text = @"";
+            cell.accessoryType = UITableViewCellAccessoryNone;
         }
         
     } else {
@@ -187,6 +194,42 @@ typedef enum {
 }
 
  */
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == MMCodeSharingSection) {
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
+        switch (indexPath.row) {
+            case MMCodeSharingCurlRow:
+                [defaults setBool:![defaults boolForKey:kMMCodeSharingCurl] forKey:kMMCodeSharingCurl];
+                break;
+            case MMCodeSharingObjCRow:
+                [defaults setBool:![defaults boolForKey:kMMCodeSharingObjC] forKey:kMMCodeSharingObjC];
+                break;
+            case MMCodeSharingRubyRow:
+                [defaults setBool:![defaults boolForKey:kMMCodeSharingRuby] forKey:kMMCodeSharingRuby];
+                break;
+            case MMCodeSharingPythonRow:
+                [defaults setBool:![defaults boolForKey:kMMCodeSharingPython] forKey:kMMCodeSharingPython];
+                break;
+            case MMCodeSharingPHPRow:
+                [defaults setBool:![defaults boolForKey:kMMCodeSharingPHP] forKey:kMMCodeSharingPHP];
+                break;
+            case MMCodeSharingJavaRow:
+                [defaults setBool:![defaults boolForKey:kMMCodeSharingJava] forKey:kMMCodeSharingJava];
+                break;
+            default:
+                break;
+        }
+        
+        [defaults synchronize];
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+    }
+    
+}
 
 #pragma mark - Button Handlers
 

@@ -27,6 +27,13 @@
         [MMCoreDataSeeder seed];
         
         [defaults setBool:YES forKey:kMMValidateSSL];
+        [defaults setBool:YES forKey:kMMCodeSharingCurl];
+        [defaults setBool:YES forKey:kMMCodeSharingObjC];
+        [defaults setBool:YES forKey:kMMCodeSharingRuby];
+        [defaults setBool:YES forKey:kMMCodeSharingPython];
+        [defaults setBool:YES forKey:kMMCodeSharingPHP];
+        [defaults setBool:YES forKey:kMMCodeSharingJava];
+        
         [defaults setObject:@"NO" forKey:kMMFirstRun];
         [defaults synchronize];
         

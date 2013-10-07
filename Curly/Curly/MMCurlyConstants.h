@@ -13,6 +13,12 @@
 
 #define kMMFirstRun @"MMFirstRun"
 #define kMMValidateSSL @"MMValidateSSL"
+#define kMMCodeSharingCurl @"MMCodeSharingCurl"
+#define kMMCodeSharingObjC @"MMCodeSharingObjC"
+#define kMMCodeSharingRuby @"MMCodeSharingRuby"
+#define kMMCodeSharingPython @"MMCodeSharingPython"
+#define kMMCodeSharingPHP @"MMCodeSharingPHP"
+#define kMMCodeSharingJava @"MMCodeSharingJava"
 
 #define kMMMethodSegue @"MethodSegue"
 
