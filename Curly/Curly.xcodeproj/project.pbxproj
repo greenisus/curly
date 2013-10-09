@@ -33,6 +33,7 @@
 		2721D8D717FE4439002BF112 /* MMRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2721D8D617FE4439002BF112 /* MMRequest.m */; };
 		2721D8DA17FE4439002BF112 /* MMUserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2721D8D917FE4439002BF112 /* MMUserAgent.m */; };
 		279DC0461804CF3E00456EF1 /* MMHTTPMethodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279DC0451804CF3E00456EF1 /* MMHTTPMethodsViewController.m */; };
+		279DC04C1804EF0100456EF1 /* MMUserAgentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279DC04B1804EF0100456EF1 /* MMUserAgentsViewController.m */; };
 		27A45EF418008E30002DEE77 /* MMCoreDataSeeder.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A45EF318008E30002DEE77 /* MMCoreDataSeeder.m */; };
 		27A6528E1801F67900A3110D /* MMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A6528D1801F67900A3110D /* MMSettingsViewController.m */; };
 		3B1C3FAE1187406395FD41AD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06CD0F90D5D7410E8F6A59FF /* libPods.a */; };
@@ -89,6 +90,8 @@
 		2721D8D917FE4439002BF112 /* MMUserAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMUserAgent.m; path = ../MMUserAgent.m; sourceTree = "<group>"; };
 		279DC0441804CF3E00456EF1 /* MMHTTPMethodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHTTPMethodsViewController.h; sourceTree = "<group>"; };
 		279DC0451804CF3E00456EF1 /* MMHTTPMethodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHTTPMethodsViewController.m; sourceTree = "<group>"; };
+		279DC04A1804EF0100456EF1 /* MMUserAgentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMUserAgentsViewController.h; sourceTree = "<group>"; };
+		279DC04B1804EF0100456EF1 /* MMUserAgentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMUserAgentsViewController.m; sourceTree = "<group>"; };
 		27A45EF218008E30002DEE77 /* MMCoreDataSeeder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMCoreDataSeeder.h; sourceTree = "<group>"; };
 		27A45EF318008E30002DEE77 /* MMCoreDataSeeder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMCoreDataSeeder.m; sourceTree = "<group>"; };
 		27A6528C1801F67900A3110D /* MMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMSettingsViewController.h; sourceTree = "<group>"; };
@@ -258,6 +261,8 @@
 				27A6528D1801F67900A3110D /* MMSettingsViewController.m */,
 				279DC0441804CF3E00456EF1 /* MMHTTPMethodsViewController.h */,
 				279DC0451804CF3E00456EF1 /* MMHTTPMethodsViewController.m */,
+				279DC04A1804EF0100456EF1 /* MMUserAgentsViewController.h */,
+				279DC04B1804EF0100456EF1 /* MMUserAgentsViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -410,6 +415,7 @@
 				27A45EF418008E30002DEE77 /* MMCoreDataSeeder.m in Sources */,
 				2721D8D417FE4439002BF112 /* MMResponse.m in Sources */,
 				27A6528E1801F67900A3110D /* MMSettingsViewController.m in Sources */,
+				279DC04C1804EF0100456EF1 /* MMUserAgentsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

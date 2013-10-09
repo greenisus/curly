@@ -52,6 +52,8 @@ typedef enum {
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
     if (section == MMCodeSharingSection) {
         return NSLocalizedString(@"The commands and programming examples to send when sharing a request.", nil);
+    } else if (section == MMRequestOptionsSection) {
+        return NSLocalizedString(@"The HTTP methods and User Agent headers available when creating a request.", nil);
     } else {
         return @"";
     }
@@ -214,6 +216,10 @@ typedef enum {
         if (indexPath.row == MMRequestOptionHTTPMethodsRow) {
             
             [self performSegueWithIdentifier:@"HTTPMethodsSegue" sender:self];
+            
+        } else if (indexPath.row == MMRequestOptionUserAgentsRow) {
+            
+            [self performSegueWithIdentifier:@"UserAgentsSegue" sender:self];
             
         }
         

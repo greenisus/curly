@@ -108,6 +108,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="PAx-TV-1ft" kind="push" identifier="HTTPMethodsSegue" id="59d-1j-wTL"/>
+                        <segue destination="TrP-2Q-pl3" kind="push" identifier="UserAgentsSegue" id="dSw-lj-f68"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hwq-c7-hh0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -144,6 +145,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7sO-WC-Ccx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="392" y="1576"/>
+        </scene>
+        <!--User Agents View Controller - User Agents-->
+        <scene sceneID="QgG-Aw-LH9">
+            <objects>
+                <tableViewController id="TrP-2Q-pl3" customClass="MMUserAgentsViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rf5-ip-KLZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="img-zE-nBQ">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="img-zE-nBQ" id="Lhq-z0-iii">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="TrP-2Q-pl3" id="UoC-TV-FYT"/>
+                            <outlet property="delegate" destination="TrP-2Q-pl3" id="cW0-pU-vZK"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="User Agents" id="V1R-FQ-i2M">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="XlQ-NH-1Dy"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GPS-h8-Scu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="864" y="1576"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NX9-q3-68T">
