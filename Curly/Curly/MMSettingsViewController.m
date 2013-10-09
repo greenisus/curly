@@ -110,6 +110,18 @@ typedef enum {
     // Configure the cell...
     if (indexPath.section == MMRequestOptionsSection) {
         
+        if (indexPath.row == MMRequestOptionHTTPMethodsRow) {
+            
+            cell.textLabel.text = NSLocalizedString(@"HTTP Methods", nil);
+            
+        } else if (indexPath.row == MMRequestOptionUserAgentsRow) {
+
+            cell.textLabel.text = NSLocalizedString(@"User Agents", nil);
+            
+        }
+        
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        
     } else if (indexPath.section == MMCodeSharingSection) {
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -197,7 +209,15 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == MMCodeSharingSection) {
+    if (indexPath.section == MMRequestOptionsSection) {
+    
+        if (indexPath.row == MMRequestOptionHTTPMethodsRow) {
+            
+            [self performSegueWithIdentifier:@"HTTPMethodsSegue" sender:self];
+            
+        }
+        
+    } else if (indexPath.section == MMCodeSharingSection) {
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         

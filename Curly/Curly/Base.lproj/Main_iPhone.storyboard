@@ -106,10 +106,44 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="PAx-TV-1ft" kind="push" identifier="HTTPMethodsSegue" id="59d-1j-wTL"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hwq-c7-hh0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="606" y="833"/>
+        </scene>
+        <!--Methods View Controller - HTTP Methods-->
+        <scene sceneID="lbc-uY-Ozu">
+            <objects>
+                <tableViewController id="PAx-TV-1ft" customClass="MMHTTPMethodsViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bac-Dt-TMl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="4YR-jw-XVJ">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4YR-jw-XVJ" id="pSy-aM-GTg">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="PAx-TV-1ft" id="8rX-7n-ohM"/>
+                            <outlet property="delegate" destination="PAx-TV-1ft" id="RYA-5K-W6a"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="HTTP Methods" id="wRu-eC-diE">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Zev-Am-9qM"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7sO-WC-Ccx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="392" y="1576"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NX9-q3-68T">
