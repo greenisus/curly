@@ -134,7 +134,11 @@
 #pragma mark - Stuff to override or use in subclasses
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    // subclasses should override
+    
+    // subclasses should override, but here's a default implementation
+    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = [[object valueForKey:@"name"] description];
+
 }
 
 - (NSFetchRequest *)fetchRequestForFetchedResultsController {
