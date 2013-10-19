@@ -16,16 +16,7 @@
 
 - (NSFetchRequest *)fetchRequestForFetchedResultsController {
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MMUserAgent" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    [fetchRequest setFetchBatchSize:20];
-    
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    return fetchRequest;
+    return [self fetchRequestForEntityName:@"MMUserAgent" sortedByKey:@"name" ascending:YES];
     
 }
 

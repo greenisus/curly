@@ -16,5 +16,6 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 - (NSFetchRequest *)fetchRequestForFetchedResultsController;
 - (UITableViewCellStyle)cellStyle;
+- (NSFetchRequest *)fetchRequestForEntityName:(NSString *)entityName sortedByKey:(NSString *)key ascending:(BOOL)ascending;
 
 @end

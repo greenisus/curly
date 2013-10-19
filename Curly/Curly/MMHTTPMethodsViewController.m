@@ -16,22 +16,16 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+    
+    // only allow the user to delete custom HTTP methods
+    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    return [[object valueForKey:@"userCreated"] boolValue];
+    
 }
 
 - (NSFetchRequest *)fetchRequestForFetchedResultsController {
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MMHTTPMethod" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    [fetchRequest setFetchBatchSize:20];
-    
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    return fetchRequest;
+    return [self fetchRequestForEntityName:@"MMHTTPMethod" sortedByKey:@"name" ascending:YES];
     
 }
 

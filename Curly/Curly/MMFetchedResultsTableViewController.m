@@ -131,7 +131,7 @@
     [self.tableView endUpdates];
 }
 
-#pragma mark - Stuff to override
+#pragma mark - Stuff to override or use in subclasses
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     // subclasses should override
@@ -143,6 +143,21 @@
 
 - (UITableViewCellStyle)cellStyle {
     return UITableViewCellStyleDefault;
+}
+
+- (NSFetchRequest *)fetchRequestForEntityName:(NSString *)entityName sortedByKey:(NSString *)key ascending:(BOOL)ascending {
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    [fetchRequest setFetchBatchSize:20];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key ascending:ascending];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    return fetchRequest;
+    
 }
 
 @end
