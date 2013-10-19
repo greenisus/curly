@@ -23,6 +23,8 @@
     #import "MMResponse.h"
     #import "MMHTTPMethod.h"
     #import "MMRequestHeader.h"
+
+    #import "MMFetchedResultsTableViewController.h"
 #endif
 
 #ifdef NDEBUG

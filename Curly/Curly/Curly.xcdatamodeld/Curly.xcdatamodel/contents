@@ -22,6 +22,7 @@
     </entity>
     <entity name="MMRequestHeader" representedClassName="MMRequestHeader" syncable="YES">
         <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="last_used" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="value" attributeType="String" syncable="YES"/>
         <relationship name="request" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MMRequest" inverseName="headers" inverseEntity="MMRequest" syncable="YES"/>

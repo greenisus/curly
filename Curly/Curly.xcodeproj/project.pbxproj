@@ -32,6 +32,8 @@
 		2721D8D417FE4439002BF112 /* MMResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2721D8D317FE4439002BF112 /* MMResponse.m */; };
 		2721D8D717FE4439002BF112 /* MMRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2721D8D617FE4439002BF112 /* MMRequest.m */; };
 		2721D8DA17FE4439002BF112 /* MMUserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2721D8D917FE4439002BF112 /* MMUserAgent.m */; };
+		2732B9D7180D9189003D454D /* MMRequestHeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B9D6180D9189003D454D /* MMRequestHeaderViewController.m */; };
+		2732B9DD1812027C003D454D /* MMFetchedResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B9DC1812027C003D454D /* MMFetchedResultsTableViewController.m */; };
 		279DC0461804CF3E00456EF1 /* MMHTTPMethodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279DC0451804CF3E00456EF1 /* MMHTTPMethodsViewController.m */; };
 		279DC04C1804EF0100456EF1 /* MMUserAgentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279DC04B1804EF0100456EF1 /* MMUserAgentsViewController.m */; };
 		27A45EF418008E30002DEE77 /* MMCoreDataSeeder.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A45EF318008E30002DEE77 /* MMCoreDataSeeder.m */; };
@@ -88,6 +90,10 @@
 		2721D8D617FE4439002BF112 /* MMRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMRequest.m; path = ../MMRequest.m; sourceTree = "<group>"; };
 		2721D8D817FE4439002BF112 /* MMUserAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MMUserAgent.h; path = ../MMUserAgent.h; sourceTree = "<group>"; };
 		2721D8D917FE4439002BF112 /* MMUserAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MMUserAgent.m; path = ../MMUserAgent.m; sourceTree = "<group>"; };
+		2732B9D5180D9189003D454D /* MMRequestHeaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMRequestHeaderViewController.h; sourceTree = "<group>"; };
+		2732B9D6180D9189003D454D /* MMRequestHeaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMRequestHeaderViewController.m; sourceTree = "<group>"; };
+		2732B9DB1812027C003D454D /* MMFetchedResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMFetchedResultsTableViewController.h; sourceTree = "<group>"; };
+		2732B9DC1812027C003D454D /* MMFetchedResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMFetchedResultsTableViewController.m; sourceTree = "<group>"; };
 		279DC0441804CF3E00456EF1 /* MMHTTPMethodsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMHTTPMethodsViewController.h; sourceTree = "<group>"; };
 		279DC0451804CF3E00456EF1 /* MMHTTPMethodsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMHTTPMethodsViewController.m; sourceTree = "<group>"; };
 		279DC04A1804EF0100456EF1 /* MMUserAgentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMUserAgentsViewController.h; sourceTree = "<group>"; };
@@ -129,13 +135,13 @@
 		27100FC017F8E8B500A7E8E8 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2732B9DA18120261003D454D /* Base View Controllers */,
+				2732B9D4180D9151003D454D /* Request Configuration */,
 				27A6528B1801F66900A3110D /* Settings */,
 				2711524017F8B18A00319A0C /* MMMasterViewController.h */,
 				2711524117F8B18A00319A0C /* MMMasterViewController.m */,
 				2711524317F8B18A00319A0C /* MMDetailViewController.h */,
 				2711524417F8B18A00319A0C /* MMDetailViewController.m */,
-				27100FC117F8F3CF00A7E8E8 /* MMRequestViewController.h */,
-				27100FC217F8F3CF00A7E8E8 /* MMRequestViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -252,6 +258,26 @@
 				2711523517F8B18A00319A0C /* MMAppDelegate.m */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		2732B9D4180D9151003D454D /* Request Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				27100FC117F8F3CF00A7E8E8 /* MMRequestViewController.h */,
+				27100FC217F8F3CF00A7E8E8 /* MMRequestViewController.m */,
+				2732B9D5180D9189003D454D /* MMRequestHeaderViewController.h */,
+				2732B9D6180D9189003D454D /* MMRequestHeaderViewController.m */,
+			);
+			name = "Request Configuration";
+			sourceTree = "<group>";
+		};
+		2732B9DA18120261003D454D /* Base View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2732B9DB1812027C003D454D /* MMFetchedResultsTableViewController.h */,
+				2732B9DC1812027C003D454D /* MMFetchedResultsTableViewController.m */,
+			);
+			name = "Base View Controllers";
 			sourceTree = "<group>";
 		};
 		27A6528B1801F66900A3110D /* Settings */ = {
@@ -406,6 +432,7 @@
 				2721D8CE17FE4438002BF112 /* MMRequestHeader.m in Sources */,
 				2711524217F8B18A00319A0C /* MMMasterViewController.m in Sources */,
 				2711523617F8B18A00319A0C /* MMAppDelegate.m in Sources */,
+				2732B9D7180D9189003D454D /* MMRequestHeaderViewController.m in Sources */,
 				2721D8D117FE4438002BF112 /* MMHTTPMethod.m in Sources */,
 				2711523F17F8B18A00319A0C /* Curly.xcdatamodeld in Sources */,
 				2721D8DA17FE4439002BF112 /* MMUserAgent.m in Sources */,
@@ -413,6 +440,7 @@
 				2721D8D717FE4439002BF112 /* MMRequest.m in Sources */,
 				2711523217F8B18A00319A0C /* main.m in Sources */,
 				27A45EF418008E30002DEE77 /* MMCoreDataSeeder.m in Sources */,
+				2732B9DD1812027C003D454D /* MMFetchedResultsTableViewController.m in Sources */,
 				2721D8D417FE4439002BF112 /* MMResponse.m in Sources */,
 				27A6528E1801F67900A3110D /* MMSettingsViewController.m in Sources */,
 				279DC04C1804EF0100456EF1 /* MMUserAgentsViewController.m in Sources */,

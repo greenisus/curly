@@ -21,6 +21,7 @@
 #define kMMCodeSharingJava @"MMCodeSharingJava"
 
 #define kMMMethodSegue @"MethodSegue"
+#define kMMHeaderSegue @"HeaderSegue"
 
 #define kMMUIPickerViewHeight 216
 

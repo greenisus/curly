@@ -46,9 +46,9 @@
     [self seedMethod:@"PUT"];
     [self seedMethod:@"DELETE"];
     [self seedMethod:@"HEAD"];
-    [self seedMethod:@"OPTIONS"];
-    [self seedMethod:@"TRACE"];
-    [self seedMethod:@"CONNECT"];
+//    [self seedMethod:@"OPTIONS"];
+//    [self seedMethod:@"TRACE"];
+//    [self seedMethod:@"CONNECT"];
     
     [self seedUserAgent:@"" name:NSLocalizedString(@"No User Agent", nil) agent:@""];
     

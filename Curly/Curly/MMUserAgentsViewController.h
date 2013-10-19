@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MMUserAgentsViewController : UITableViewController
-
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@interface MMUserAgentsViewController : MMFetchedResultsTableViewController
 
 @end

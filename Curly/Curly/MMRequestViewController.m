@@ -195,7 +195,7 @@ typedef enum {
         case MMRequestSection:
             return MMRequestNumberOfRows;
         case MMHeadersSection:
-            return [self.requestHeaders count] + 1;
+            return [self.requestHeaders count] + 4;
         case MMBodySection:
             return 1;
         default:
@@ -316,6 +316,8 @@ typedef enum {
         } else {
             
             // show the header
+            cell.textLabel.text = @"Header Name";
+            cell.detailTextLabel.text = @"Value";
             
         }
         
@@ -425,10 +427,12 @@ typedef enum {
 //        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:MMUserAgentRow - 1 inSection:MMRequestSection],
 //                                                 [NSIndexPath indexPathForRow:MMUserAgentPickerRow + 1 inSection:MMRequestSection]] withRowAnimation:UITableViewRowAnimationNone];
         
+    } else if (indexPath.section == MMHeadersSection) {
+        
+        [self performSegueWithIdentifier:kMMHeaderSegue sender:self];
+        
     }
     
-                                
-//    [self performSegueWithIdentifier:kMMMethodSegue sender:self];
                                 
 }
 

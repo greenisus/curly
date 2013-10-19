@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MMHTTPMethodsViewController : UITableViewController <NSFetchedResultsControllerDelegate>
-
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@interface MMHTTPMethodsViewController : MMFetchedResultsTableViewController
 
 @end
