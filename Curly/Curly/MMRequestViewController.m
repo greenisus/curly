@@ -7,6 +7,7 @@
 //
 
 #import "MMRequestViewController.h"
+#import "MMRequestHeaderViewController.h"
 
 typedef enum {
     MMRequestSection,
@@ -195,7 +196,7 @@ typedef enum {
         case MMRequestSection:
             return MMRequestNumberOfRows;
         case MMHeadersSection:
-            return [self.requestHeaders count] + 4;
+            return [self.requestHeaders count] + 1; // +1 for the "add header" row
         case MMBodySection:
             return 1;
         default:
@@ -438,16 +439,17 @@ typedef enum {
 
 #pragma mark - Navigation
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    
-//    if ([segue.identifier isEqualToString:kMMMethodSegue]) {
-//        
-//        MMHTTPMethodViewController *vc = (MMHTTPMethodViewController *)[segue destinationViewController];
-//        DLog(@"vc: %@", vc);
-//        
-//    }
-//    
-//}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:kMMHeaderSegue]) {
+        
+        MMRequestHeaderViewController *vc = (MMRequestHeaderViewController *)[segue destinationViewController];
+#warning need to set a request object for the vc
+//        DLog(@"NEED TO SET A REQUEST object for the header vc.  ");
+        
+    }
+    
+}
 
 #pragma mark - UITextFieldDelegate
 

@@ -21,6 +21,13 @@ typedef enum {
 } MMHeaderSectionType;
 
 @interface MMRequestHeaderViewController ()
+
+@property (nonatomic, strong) UIView *nameTextFieldContainer;
+@property (nonatomic, strong) UITextField *nameTextField;
+
+@property (nonatomic, strong) UIView *valueTextFieldContainer;
+@property (nonatomic, strong) UITextField *valueTextField;
+
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
 
@@ -29,6 +36,41 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = NSLocalizedString(@"Header", nil);
+    
+    if (!self.header) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonPressed:)];
+    }
+    
+    [self configureTextFields];
+    
+}
+
+- (void)configureTextFields {
+    
+    self.nameTextFieldContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 225, 26)];
+    self.nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 2, 225, 24)];
+    self.nameTextField.delegate = self;
+    self.nameTextField.returnKeyType = UIReturnKeyNext;
+    self.nameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.nameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.nameTextField.textAlignment = NSTextAlignmentRight;
+    self.nameTextField.placeholder = NSLocalizedString(@"Header Name", nil);
+    self.nameTextField.text = @"";
+    [self.nameTextFieldContainer addSubview:self.nameTextField];
+
+    self.valueTextFieldContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 225, 26)];
+    self.valueTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 2, 225, 24)];
+    self.valueTextField.delegate = self;
+    self.valueTextField.returnKeyType = UIReturnKeyDone;
+    self.valueTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.valueTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.valueTextField.textAlignment = NSTextAlignmentRight;
+    self.valueTextField.placeholder = NSLocalizedString(@"Header Value", nil);
+    self.valueTextField.text = @"";
+    [self.valueTextFieldContainer addSubview:self.valueTextField];
+    
+    [self.nameTextField becomeFirstResponder];
+    
 }
 
 #pragma mark - Table view data source
@@ -172,23 +214,51 @@ typedef enum {
     
     if (indexPath.section == MMHeaderSection) {
     
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         if (indexPath.row == MMNameRow) {
             cell.textLabel.text = NSLocalizedString(@"Name", nil);
             cell.detailTextLabel.text = nil;
+            cell.accessoryView = self.nameTextFieldContainer;
         } else if (indexPath.row == MMValueRow) {
             cell.textLabel.text = NSLocalizedString(@"Value", nil);
             cell.detailTextLabel.text = nil;
+            cell.accessoryView = self.valueTextFieldContainer;
         }
         
     } else if (indexPath.section == MMUsedHeadersSection) {
+
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
         
         indexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
         NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
         cell.textLabel.text = [[object valueForKey:@"name"] description];
         cell.detailTextLabel.text = [[object valueForKey:@"value"] description];
+        cell.accessoryView = nil;
         
     }
     
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    [textField resignFirstResponder];
+    
+    if ([textField isEqual:self.nameTextField]) {
+        [self.valueTextField becomeFirstResponder];
+    }
+    
+    return NO;
+    
+}
+
+#pragma mark - Button Handlers
+
+- (void)doneButtonPressed:(id)sender {
+    
+    DLog(@"Add button pressed");
     
 }
 

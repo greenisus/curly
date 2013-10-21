@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MMRequestHeaderViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface MMRequestHeaderViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate>
+
+@property (nonatomic, strong) MMRequest *request;
+@property (nonatomic, strong) MMRequestHeader *header;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
