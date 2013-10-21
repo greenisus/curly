@@ -10,6 +10,8 @@
 
 @interface MMRequestViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
+@property (nonatomic, strong) MMRequest *request;
+
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)doneButtonPressed:(id)sender;
 

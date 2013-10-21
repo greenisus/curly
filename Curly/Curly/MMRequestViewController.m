@@ -81,6 +81,12 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if (!self.request) {
+        NSManagedObjectContext *context = [MMAppDelegate context];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"MMRequest" inManagedObjectContext:context];
+        self.request = [[MMRequest alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    }
+    
     [self configureCellAccessories];
     [self loadSupportingData];
     
@@ -511,26 +517,27 @@ typedef enum {
 #pragma mark - Button Handlers
 
 - (IBAction)cancelButtonPressed:(id)sender {
+    
+#pragma warning test to see if i need to rollback
+//    [[MMAppDelegate context] rollback];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)doneButtonPressed:(id)sender {
     
     NSManagedObjectContext *context = [MMAppDelegate context];
-    
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MMRequest" inManagedObjectContext:context];
     NSError *error = nil;
     
-    MMRequest *request = [[MMRequest alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-    request.name = self.nameTextField.text;
-    request.url = self.urlTextField.text;
-    request.method = selectedHTTPMethod;
-    request.userAgent = selectedUserAgent;
-    request.validateSSL = @(self.sslSwitch.on);
-    request.created = [NSDate date];
+    self.request.name = self.nameTextField.text;
+    self.request.url = self.urlTextField.text;
+    self.request.method = selectedHTTPMethod;
+    self.request.userAgent = selectedUserAgent;
+    self.request.validateSSL = @(self.sslSwitch.on);
+    self.request.created = [NSDate date];
     
-    [context insertObject:request];
-
+    [context insertObject:self.request];
+    
     if ([context save:&error]) {
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
