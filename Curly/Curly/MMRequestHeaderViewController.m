@@ -160,6 +160,7 @@ typedef enum {
     return _fetchedResultsController;
 }
 
+/*
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
 }
@@ -208,6 +209,10 @@ typedef enum {
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
+}
+*/
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView reloadData];
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -258,7 +263,27 @@ typedef enum {
 
 - (void)doneButtonPressed:(id)sender {
     
-    DLog(@"Add button pressed");
+    NSManagedObjectContext *context = [MMAppDelegate context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MMRequestHeader" inManagedObjectContext:context];
+    MMRequestHeader *header = [[MMRequestHeader alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    header.name = self.nameTextField.text;
+    header.value = self.valueTextField.text;
+    header.created = [NSDate date];
+    
+    [context insertObject:header];
+    [self.request addHeadersObject:header];
+    
+    NSError *error = nil;
+    if ([context save:&error]) {
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    } else {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:[error description] delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss", nil) otherButtonTitles:nil];
+        [alert show];
+        
+    }
     
 }
 

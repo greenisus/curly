@@ -84,7 +84,7 @@ typedef enum {
     if (!self.request) {
         NSManagedObjectContext *context = [MMAppDelegate context];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"MMRequest" inManagedObjectContext:context];
-        self.request = [[MMRequest alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+//        self.request = [[MMRequest alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
     }
     
     [self configureCellAccessories];
@@ -450,8 +450,7 @@ typedef enum {
     if ([segue.identifier isEqualToString:kMMHeaderSegue]) {
         
         MMRequestHeaderViewController *vc = (MMRequestHeaderViewController *)[segue destinationViewController];
-#warning need to set a request object for the vc
-//        DLog(@"NEED TO SET A REQUEST object for the header vc.  ");
+        vc.request = self.request;
         
     }
     
