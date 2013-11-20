@@ -13,6 +13,7 @@
 
 #define kMMFirstRun @"MMFirstRun"
 #define kMMValidateSSL @"MMValidateSSL"
+#define kMMEnableUserAgent @"kMMEnableUserAgent"
 #define kMMCodeSharingCurl @"MMCodeSharingCurl"
 #define kMMCodeSharingObjC @"MMCodeSharingObjC"
 #define kMMCodeSharingRuby @"MMCodeSharingRuby"

@@ -64,6 +64,7 @@ typedef enum {
 
 @property (nonatomic, strong) UIView *urlTextFieldContainer;
 @property (nonatomic, strong) UITextField *urlTextField;
+@property (nonatomic, strong) UISwitch *userAgentSwitch;
 @property (nonatomic, strong) UISwitch *sslSwitch;
 
 @property (nonatomic, strong) UIPickerView *methodPicker;
@@ -142,6 +143,12 @@ typedef enum {
     self.sslSwitch.onTintColor = kMMTintColor;
     self.sslSwitch.on = [defaults boolForKey:kMMValidateSSL];
     [self.sslSwitch addTarget:self action:@selector(sslSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    // configure user agent switch
+    self.userAgentSwitch = [[UISwitch alloc] init];
+    self.userAgentSwitch.onTintColor = kMMTintColor;
+    self.userAgentSwitch.on = [defaults boolForKey:kMMEnableUserAgent];
+    [self.userAgentSwitch addTarget:self action:@selector(userAgentSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
     
     self.nameTextFieldContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 225, 26)];
     self.nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 2, 225, 24)];
@@ -293,13 +300,8 @@ typedef enum {
         } else if (indexPath.row == MMUserAgentRow) {
 
             cell.textLabel.text = NSLocalizedString(@"User Agent", nil);
-            cell.detailTextLabel.text = selectedUserAgent.name;
-            cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-            if (userAgentPickerActive) {
-                cell.detailTextLabel.textColor = kMMTintColor;
-            } else {
-                cell.detailTextLabel.textColor = [UIColor darkTextColor];
-            }
+            cell.detailTextLabel.text = @"";
+            cell.accessoryView = self.userAgentSwitch;
             
         } else if (indexPath.row == MMUserAgentPickerRow) {
             
@@ -405,30 +407,30 @@ typedef enum {
 //        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:MMMethodRow - 1 inSection:MMRequestSection],
 //                                                 [NSIndexPath indexPathForRow:MMMethodPickerRow + 1 inSection:MMRequestSection]] withRowAnimation:UITableViewRowAnimationNone];
         
-    } else if (indexPath.section == MMRequestSection && indexPath.row == MMUserAgentRow) {
-        
-        userAgentPickerActive = !userAgentPickerActive;
-        
-        if (userAgentPickerActive) {
-            
-            [UIView animateWithDuration:0.3 animations:^{
-                CGRect r = self.userAgentPicker.frame;
-                self.userAgentPickerCell.frame = CGRectMake(r.origin.x, r.origin.y, r.size.width, kMMUIPickerViewHeight);
-            }];
-            
-        } else {
-            
-            [UIView animateWithDuration:0.3 animations:^{
-                CGRect r = self.userAgentPicker.frame;
-                self.userAgentPickerCell.frame = CGRectMake(r.origin.x, r.origin.y, r.size.width, 0);
-            }];
-            
-        }
-        
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:MMUserAgentRow inSection:MMRequestSection]] withRowAnimation:UITableViewRowAnimationAutomatic];
-//        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:MMUserAgentRow - 1 inSection:MMRequestSection],
-//                                                 [NSIndexPath indexPathForRow:MMUserAgentPickerRow + 1 inSection:MMRequestSection]] withRowAnimation:UITableViewRowAnimationNone];
-        
+//    } else if (indexPath.section == MMRequestSection && indexPath.row == MMUserAgentRow) {
+//        
+//        userAgentPickerActive = !userAgentPickerActive;
+//        
+//        if (userAgentPickerActive) {
+//            
+//            [UIView animateWithDuration:0.3 animations:^{
+//                CGRect r = self.userAgentPicker.frame;
+//                self.userAgentPickerCell.frame = CGRectMake(r.origin.x, r.origin.y, r.size.width, kMMUIPickerViewHeight);
+//            }];
+//            
+//        } else {
+//            
+//            [UIView animateWithDuration:0.3 animations:^{
+//                CGRect r = self.userAgentPicker.frame;
+//                self.userAgentPickerCell.frame = CGRectMake(r.origin.x, r.origin.y, r.size.width, 0);
+//            }];
+//            
+//        }
+//        
+//        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:MMUserAgentRow inSection:MMRequestSection]] withRowAnimation:UITableViewRowAnimationAutomatic];
+////        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:MMUserAgentRow - 1 inSection:MMRequestSection],
+////                                                 [NSIndexPath indexPathForRow:MMUserAgentPickerRow + 1 inSection:MMRequestSection]] withRowAnimation:UITableViewRowAnimationNone];
+//        
     } else if (indexPath.section == MMHeadersSection) {
         
         [self performSegueWithIdentifier:kMMHeaderSegue sender:self];
@@ -579,6 +581,36 @@ typedef enum {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:self.sslSwitch.on forKey:kMMValidateSSL];
     [defaults synchronize];
+}
+
+- (void)userAgentSwitchValueChanged:(id)sender {
+
+    // set whatever the switch is to the default value going forward
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:self.sslSwitch.on forKey:kMMEnableUserAgent];
+    [defaults synchronize];
+    
+    // hide/show the user agent picker cell
+    userAgentPickerActive = !userAgentPickerActive;
+    
+    if (userAgentPickerActive) {
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            CGRect r = self.userAgentPicker.frame;
+            self.userAgentPickerCell.frame = CGRectMake(r.origin.x, r.origin.y, r.size.width, kMMUIPickerViewHeight);
+        }];
+        
+    } else {
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            CGRect r = self.userAgentPicker.frame;
+            self.userAgentPickerCell.frame = CGRectMake(r.origin.x, r.origin.y, r.size.width, 0);
+        }];
+        
+    }
+    
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:MMUserAgentRow inSection:MMRequestSection]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
 }
 
 #pragma mark - MMRequestHeaderViewControllerDelegate
