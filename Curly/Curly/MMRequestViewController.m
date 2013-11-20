@@ -587,7 +587,7 @@ typedef enum {
 
     // set whatever the switch is to the default value going forward
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:self.sslSwitch.on forKey:kMMEnableUserAgent];
+    [defaults setBool:self.userAgentSwitch.on forKey:kMMEnableUserAgent];
     [defaults synchronize];
     
     // hide/show the user agent picker cell
