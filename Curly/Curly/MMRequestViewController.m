@@ -317,8 +317,9 @@ typedef enum {
         } else {
             
             // show the header
-            cell.textLabel.text = @"Header Name";
-            cell.detailTextLabel.text = @"Value";
+            MMRequestHeader *header = self.requestHeaders[indexPath.row];
+            cell.textLabel.text = header.name;
+            cell.detailTextLabel.text = header.value;
             
         }
         
@@ -517,29 +518,58 @@ typedef enum {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (BOOL)validateInput {
+    
+    if ([self.nameTextField.text hasValue]) {
+        
+        if ([self.urlTextField.text hasValue]) {
+
+            return YES;
+            
+        } else {
+
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"URL is a required field.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss", nil) otherButtonTitles:nil];
+            [alert show];
+            return NO;
+            
+        }
+        
+    } else {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Name is a required field.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss", nil) otherButtonTitles:nil];
+        [alert show];
+        return NO;
+        
+    }
+    
+}
+
 - (IBAction)doneButtonPressed:(id)sender {
     
-    NSManagedObjectContext *context = [MMAppDelegate context];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MMRequest" inManagedObjectContext:context];
-    NSError *error = nil;
-    MMRequest *request = [[MMRequest alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    if ([self validateInput]) {
     
-    request.name = self.nameTextField.text;
-    request.url = self.urlTextField.text;
-    request.method = selectedHTTPMethod;
-    request.userAgent = selectedUserAgent;
-    request.validateSSL = @(self.sslSwitch.on);
-    request.created = [NSDate date];
-    
-    [context insertObject:request];
-    
-    if ([context save:&error]) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    } else {
+        NSManagedObjectContext *context = [MMAppDelegate context];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"MMRequest" inManagedObjectContext:context];
+        NSError *error = nil;
+        MMRequest *request = [[MMRequest alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+        
+        request.name = self.nameTextField.text;
+        request.url = self.urlTextField.text;
+        request.method = selectedHTTPMethod;
+        request.userAgent = selectedUserAgent;
+        request.validateSSL = @(self.sslSwitch.on);
+        request.created = [NSDate date];
+        
+        [context insertObject:request];
+        
+        if ([context save:&error]) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } else {
 #warning "validation error messages should go here"
-        DLog(@"Error saving request: %@", error);
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"There was a problem saving this HTTP request.  Please try again.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss", nil) otherButtonTitles:nil];
-        [alert show];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", nil) message:NSLocalizedString(@"There was a problem saving this HTTP request.  Please try again.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss", nil) otherButtonTitles:nil];
+            [alert show];
+        }
+        
     }
 
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270E9C3B183D789C00491D20 /* NSString+MMExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 270E9C3A183D789C00491D20 /* NSString+MMExtras.m */; };
 		27100FC317F8F3CF00A7E8E8 /* MMRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27100FC217F8F3CF00A7E8E8 /* MMRequestViewController.m */; };
 		2711522417F8B18900319A0C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2711522317F8B18900319A0C /* Foundation.framework */; };
 		2711522617F8B18900319A0C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2711522517F8B18900319A0C /* CoreGraphics.framework */; };
@@ -53,6 +54,8 @@
 
 /* Begin PBXFileReference section */
 		06CD0F90D5D7410E8F6A59FF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		270E9C39183D789C00491D20 /* NSString+MMExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MMExtras.h"; sourceTree = "<group>"; };
+		270E9C3A183D789C00491D20 /* NSString+MMExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MMExtras.m"; sourceTree = "<group>"; };
 		27100FC117F8F3CF00A7E8E8 /* MMRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMRequestViewController.h; sourceTree = "<group>"; };
 		27100FC217F8F3CF00A7E8E8 /* MMRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMRequestViewController.m; sourceTree = "<group>"; };
 		27100FC417F90AF700A7E8E8 /* MMCurlyConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMCurlyConstants.h; sourceTree = "<group>"; };
@@ -132,6 +135,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		270E9C38183D788200491D20 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				270E9C39183D789C00491D20 /* NSString+MMExtras.h */,
+				270E9C3A183D789C00491D20 /* NSString+MMExtras.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		27100FC017F8E8B500A7E8E8 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +194,7 @@
 		2711522B17F8B18A00319A0C /* Curly */ = {
 			isa = PBXGroup;
 			children = (
+				270E9C38183D788200491D20 /* Categories */,
 				2721D8DC17FE4513002BF112 /* Classes */,
 				2721D8DB17FE44FD002BF112 /* Storyboards */,
 				2721D8CB17FE4288002BF112 /* Core Data */,
@@ -437,6 +450,7 @@
 				2711523F17F8B18A00319A0C /* Curly.xcdatamodeld in Sources */,
 				2721D8DA17FE4439002BF112 /* MMUserAgent.m in Sources */,
 				2711524517F8B18A00319A0C /* MMDetailViewController.m in Sources */,
+				270E9C3B183D789C00491D20 /* NSString+MMExtras.m in Sources */,
 				2721D8D717FE4439002BF112 /* MMRequest.m in Sources */,
 				2711523217F8B18A00319A0C /* main.m in Sources */,
 				27A45EF418008E30002DEE77 /* MMCoreDataSeeder.m in Sources */,
