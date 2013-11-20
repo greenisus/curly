@@ -81,12 +81,6 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (!self.request) {
-        NSManagedObjectContext *context = [MMAppDelegate context];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"MMRequest" inManagedObjectContext:context];
-//        self.request = [[MMRequest alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-    }
-    
     [self configureCellAccessories];
     [self loadSupportingData];
     
@@ -450,7 +444,7 @@ typedef enum {
     if ([segue.identifier isEqualToString:kMMHeaderSegue]) {
         
         MMRequestHeaderViewController *vc = (MMRequestHeaderViewController *)[segue destinationViewController];
-        vc.request = self.request;
+        vc.delegate = self;
         
     }
     
@@ -526,16 +520,18 @@ typedef enum {
 - (IBAction)doneButtonPressed:(id)sender {
     
     NSManagedObjectContext *context = [MMAppDelegate context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MMRequest" inManagedObjectContext:context];
     NSError *error = nil;
+    MMRequest *request = [[MMRequest alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
     
-    self.request.name = self.nameTextField.text;
-    self.request.url = self.urlTextField.text;
-    self.request.method = selectedHTTPMethod;
-    self.request.userAgent = selectedUserAgent;
-    self.request.validateSSL = @(self.sslSwitch.on);
-    self.request.created = [NSDate date];
+    request.name = self.nameTextField.text;
+    request.url = self.urlTextField.text;
+    request.method = selectedHTTPMethod;
+    request.userAgent = selectedUserAgent;
+    request.validateSSL = @(self.sslSwitch.on);
+    request.created = [NSDate date];
     
-    [context insertObject:self.request];
+    [context insertObject:request];
     
     if ([context save:&error]) {
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -553,6 +549,15 @@ typedef enum {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:self.sslSwitch.on forKey:kMMValidateSSL];
     [defaults synchronize];
+}
+
+#pragma mark - MMRequestHeaderViewControllerDelegate
+
+- (void)headerViewControllerSelectedHeader:(MMRequestHeader *)header {
+    
+    [self.requestHeaders addObject:header];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:MMHeadersSection] withRowAnimation:UITableViewRowAnimationNone];
+    
 }
 
 @end

@@ -12,6 +12,7 @@
 @implementation MMRequestHeader
 
 @dynamic name;
+@dynamic nickname;
 @dynamic value;
 @dynamic created;
 @dynamic request;

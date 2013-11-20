@@ -13,6 +13,7 @@
 @interface MMRequestHeader : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * nickname;
 @property (nonatomic, retain) NSString * value;
 @property (nonatomic, retain) NSDate * created;
 @property (nonatomic, retain) NSManagedObject *request;

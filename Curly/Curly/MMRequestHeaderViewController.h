@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol MMRequestHeaderViewControllerDelegate;
+
 @interface MMRequestHeaderViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) MMRequest *request;
@@ -15,5 +17,13 @@
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
+@property (weak, nonatomic) id<MMRequestHeaderViewControllerDelegate> delegate;
+
+@end
+
+@protocol MMRequestHeaderViewControllerDelegate
+
+- (void)headerViewControllerSelectedHeader:(MMRequestHeader *)header;
 
 @end

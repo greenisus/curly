@@ -11,6 +11,7 @@
 typedef enum {
     MMNameRow,
     MMValueRow,
+    MMNicknameRow,
     MMNumberOfHeaderRows
 } MMHeaderSectionRowType;
 
@@ -27,6 +28,9 @@ typedef enum {
 
 @property (nonatomic, strong) UIView *valueTextFieldContainer;
 @property (nonatomic, strong) UITextField *valueTextField;
+
+@property (nonatomic, strong) UIView *nicknameTextFieldContainer;
+@property (nonatomic, strong) UITextField *nicknameTextField;
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
@@ -45,30 +49,40 @@ typedef enum {
     
 }
 
+- (void)configureTextField:(NSString *)textFieldPropertyName placeholder:(NSString *)placeholder width:(CGFloat)width {
+    
+    NSString *containerPropertyName = [NSString stringWithFormat:@"%@Container", textFieldPropertyName];
+    
+    [self setValue:[[UIView alloc] initWithFrame:CGRectMake(0, 0, width, 26)] forKey:containerPropertyName];
+    [self setValue:[[UITextField alloc] initWithFrame:CGRectMake(0, 2, width, 24)] forKey:textFieldPropertyName];
+    
+    UIView *container = [self valueForKey:containerPropertyName];
+    UITextField *textField = [self valueForKey:textFieldPropertyName];
+    
+    textField.delegate = self;
+    textField.returnKeyType = UIReturnKeyNext;
+    textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    textField.textAlignment = NSTextAlignmentRight;
+    textField.placeholder = placeholder;
+    textField.text = @"";
+    [container addSubview:textField];
+    
+}
+
+- (void)configureTextField:(NSString *)textFieldPropertyName placeholder:(NSString *)placeholder {
+    
+    [self configureTextField:textFieldPropertyName placeholder:placeholder width:225];
+    
+}
+
 - (void)configureTextFields {
     
-    self.nameTextFieldContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 225, 26)];
-    self.nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 2, 225, 24)];
-    self.nameTextField.delegate = self;
-    self.nameTextField.returnKeyType = UIReturnKeyNext;
-    self.nameTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.nameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.nameTextField.textAlignment = NSTextAlignmentRight;
-    self.nameTextField.placeholder = NSLocalizedString(@"Header Name", nil);
-    self.nameTextField.text = @"";
-    [self.nameTextFieldContainer addSubview:self.nameTextField];
+    [self configureTextField:@"nameTextField" placeholder:NSLocalizedString(@"Header Name", nil)];
+    [self configureTextField:@"valueTextField" placeholder:NSLocalizedString(@"Header Value", nil)];
+    [self configureTextField:@"nicknameTextField" placeholder:NSLocalizedString(@"Optional", nil) width:195];
+    self.nicknameTextField.returnKeyType = UIReturnKeyDone;
 
-    self.valueTextFieldContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 225, 26)];
-    self.valueTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 2, 225, 24)];
-    self.valueTextField.delegate = self;
-    self.valueTextField.returnKeyType = UIReturnKeyDone;
-    self.valueTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.valueTextField.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.valueTextField.textAlignment = NSTextAlignmentRight;
-    self.valueTextField.placeholder = NSLocalizedString(@"Header Value", nil);
-    self.valueTextField.text = @"";
-    [self.valueTextFieldContainer addSubview:self.valueTextField];
-    
     [self.nameTextField becomeFirstResponder];
     
 }
@@ -105,6 +119,14 @@ typedef enum {
         return @"";
     }
     
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    if (section == MMHeaderSection) {
+        return NSLocalizedString(@"Set a nickname to easily find and reuse headers.", nil);
+    } else {
+        return @"";
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -229,6 +251,10 @@ typedef enum {
             cell.textLabel.text = NSLocalizedString(@"Value", nil);
             cell.detailTextLabel.text = nil;
             cell.accessoryView = self.valueTextFieldContainer;
+        } else if (indexPath.row == MMNicknameRow) {
+            cell.textLabel.text = NSLocalizedString(@"Nickname", nil);
+            cell.detailTextLabel.text = nil;
+            cell.accessoryView = self.nicknameTextFieldContainer;
         }
         
     } else if (indexPath.section == MMUsedHeadersSection) {
@@ -237,8 +263,15 @@ typedef enum {
         
         indexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
         NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        cell.textLabel.text = [[object valueForKey:@"name"] description];
-        cell.detailTextLabel.text = [[object valueForKey:@"value"] description];
+        
+        if ([object valueForKey:@"nickname"]) {
+            cell.textLabel.text = [[object valueForKey:@"nickname"] description];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@: %@", [object valueForKey:@"name"], [object valueForKey:@"value"]];
+        } else {
+            cell.textLabel.text = [[object valueForKey:@"name"] description];
+            cell.detailTextLabel.text = [[object valueForKey:@"value"] description];
+        }
+        
         cell.accessoryView = nil;
         
     }
@@ -253,6 +286,8 @@ typedef enum {
     
     if ([textField isEqual:self.nameTextField]) {
         [self.valueTextField becomeFirstResponder];
+    } else if ([textField isEqual:self.valueTextField]) {
+        [self.nicknameTextField becomeFirstResponder];
     }
     
     return NO;
@@ -261,11 +296,27 @@ typedef enum {
 
 #pragma mark - Button Handlers
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == MMUsedHeadersSection) {
+        
+        indexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
+        NSManagedObject *header = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        [self.delegate headerViewControllerSelectedHeader:(MMRequestHeader *)header];
+        [self.navigationController popViewControllerAnimated:YES];
+
+    }
+    
+}
+
 - (void)doneButtonPressed:(id)sender {
     
     NSManagedObjectContext *context = [MMAppDelegate context];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"MMRequestHeader" inManagedObjectContext:context];
     MMRequestHeader *header = [[MMRequestHeader alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    if (![self.nicknameTextField.text isEqual:@""]) {
+        header.nickname = self.nicknameTextField.text;
+    }
     header.name = self.nameTextField.text;
     header.value = self.valueTextField.text;
     header.created = [NSDate date];
@@ -276,6 +327,7 @@ typedef enum {
     NSError *error = nil;
     if ([context save:&error]) {
         
+        [self.delegate headerViewControllerSelectedHeader:header];
         [self.navigationController popViewControllerAnimated:YES];
         
     } else {

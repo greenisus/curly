@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MMRequestHeaderViewController.h"
 
-@interface MMRequestViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
-
-@property (nonatomic, strong) MMRequest *request;
+@interface MMRequestViewController : UITableViewController <UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, MMRequestHeaderViewControllerDelegate>
 
 - (IBAction)cancelButtonPressed:(id)sender;
 - (IBAction)doneButtonPressed:(id)sender;
