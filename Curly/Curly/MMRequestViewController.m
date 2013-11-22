@@ -561,6 +561,8 @@ typedef enum {
         request.userAgent = selectedUserAgent;
         request.validateSSL = @(self.sslSwitch.on);
         request.created = [NSDate date];
+        request.headers = [NSSet setWithArray:self.requestHeaders];
+        
         
         [context insertObject:request];
         
